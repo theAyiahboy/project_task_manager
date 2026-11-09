@@ -1,0 +1,77 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Project | Task Manager</title>
+
+    <link href="{% static 'css/output.css' %}" rel="stylesheet">
+</head>
+
+<body class="min-h-screen bg-slate-100 text-slate-900">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-sm">
+        <div class="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
+
+            <a href="{% url 'home' %}" class="text-xl font-bold text-blue-600">
+                Task Manager
+            </a>
+
+            <a href="{% url 'home' %}"
+                class="text-sm font-medium text-slate-600 hover:text-blue-600 transition">
+                Back to Home
+            </a>
+
+        </div>
+    </nav>
+
+
+    <!-- Main Content -->
+    <main class="mx-auto max-w-2xl px-6 py-16">
+
+        <div class="rounded-2xl bg-white p-8 shadow-sm">
+
+            <h1 class="text-3xl font-bold text-slate-800">
+                Create a New Project
+            </h1>
+
+            <p class="mt-2 text-slate-500">
+                Fill in the details below to create your project.
+            </p>
+
+            <form method="POST" class="mt-8 space-y-6">
+
+                {% csrf_token %}
+
+                <div class="space-y-4">
+                    {{ form.as_p }}
+                </div>
+
+                <div class="flex items-center gap-4">
+
+                    <button type="submit"
+                        class="rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700 transition">
+                        Create Project
+                    </button>
+
+                    <a href="{% url 'home' %}"
+                        class="rounded-lg bg-slate-200 px-6 py-3 font-semibold text-slate-700 hover:bg-slate-300 transition">
+                        Cancel
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

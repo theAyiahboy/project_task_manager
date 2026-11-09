@@ -1,0 +1,113 @@
+
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create Task | Project Task Manager</title>
+    <link href="{% static 'css/output.css' %}" rel="stylesheet">
+</head>
+
+<body class="min-h-screen bg-slate-100 text-slate-900">
+
+    <main class="mx-auto max-w-3xl px-6 py-16">
+
+        <div class="rounded-2xl bg-white p-8 shadow-sm">
+
+            <h1 class="text-3xl font-bold text-slate-800">
+                Create a New Task
+            </h1>
+
+            <p class="mt-2 text-slate-600">
+                Add a task to <span class="font-semibold text-blue-600">{{ project.name }}</span>
+            </p>
+
+            <form method="POST" class="mt-8 space-y-6">
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    <div class="rounded-lg bg-red-50 p-3 text-sm text-red-600">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <div>
+                    <label for="{{ form.title.id_for_label }}"
+                        class="mb-2 block text-sm font-semibold text-slate-700">
+                        Task Title
+                    </label>
+                    {{ form.title }}
+                    {% for error in form.title.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div>
+                    <label for="{{ form.description.id_for_label }}"
+                        class="mb-2 block text-sm font-semibold text-slate-700">
+                        Description
+                    </label>
+                    {{ form.description }}
+                    {% for error in form.description.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div>
+                    <label for="{{ form.priority.id_for_label }}"
+                        class="mb-2 block text-sm font-semibold text-slate-700">
+                        Priority
+                    </label>
+                    {{ form.priority }}
+                    {% for error in form.priority.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div>
+                    <label for="{{ form.status.id_for_label }}"
+                        class="mb-2 block text-sm font-semibold text-slate-700">
+                        Status
+                    </label>
+                    {{ form.status }}
+                    {% for error in form.status.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div>
+                    <label for="{{ form.due_date.id_for_label }}"
+                        class="mb-2 block text-sm font-semibold text-slate-700">
+                        Due Date
+                    </label>
+                    {{ form.due_date }}
+                    {% for error in form.due_date.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div class="flex items-center gap-4">
+
+                    <button type="submit"
+                        class="rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700">
+                        Create Task
+                    </button>
+
+                    <a href="{% url 'home' %}"
+                        class="rounded-lg bg-slate-200 px-6 py-3 font-semibold text-slate-700 transition hover:bg-slate-300">
+                        Cancel
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</body>
+</html>
